@@ -107,7 +107,7 @@ define aptly::mirror (
   }
 
   exec { "aptly_mirror_create-${title}":
-    command     => "${aptly_cmd} create ${architectures_arg} -with-sources=${with_sources} -with-udebs=${with_udebs}${filter_arg}${filter_with_deps_arg} ${title} ${location} ${release}${components_arg}",
+    command     => "${aptly_cmd} create ${architectures_arg} -keyring=${keyring} -with-sources=${with_sources} -with-udebs=${with_udebs}${filter_arg}${filter_with_deps_arg} ${title} ${location} ${release}${components_arg}",
     unless      => "${aptly_cmd} show ${title} >/dev/null",
     user        => $aptly::user,
     require     => $exec_aptly_mirror_create_require,
